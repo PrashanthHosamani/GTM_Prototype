@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outmate — GTM Account Intelligence Platform</title>
+  <meta name="description" content="AI-powered company research and go-to-market intelligence. Research any company and get a structured dossier with funding, leadership, growth signals, and GTM opportunity analysis.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
+          </svg>
+        </div>
+        <span class="brand-name">Outmate</span>
+        <span class="brand-badge">Intelligence</span>
+      </div>
+      <div class="nav-status">
+        <div class="status-indicator" id="navStatusDot"></div>
+        <span id="navStatusText">Systems Online</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="app-container">
+
+        <section class="hero-section" id="heroSection">
+      <div class="hero-content">
+        <h1 class="hero-title">Account Intelligence <span class="hero-accent">Research</span></h1>
+        <p class="hero-subtitle">Enter a company name to generate a comprehensive GTM intelligence dossier powered by AI-synthesized web research.</p>
+      </div>
+
+      <div class="search-card" id="searchCard">
+        <div class="search-fields">
+          <div class="field-group field-primary">
+            <label class="field-label" for="companyInput">Company Name</label>
+            <input type="text" id="companyInput" class="field-input" placeholder="e.g. Stripe, Freshworks, Ramp" autocomplete="off">
+          </div>
+          <div class="field-group field-secondary">
+            <label class="field-label" for="domainInput">Domain <span class="field-optional">(optional)</span></label>
+            <input type="text" id="domainInput" class="field-input" placeholder="e.g. stripe.com" autocomplete="off">
+          </div>
+        </div>
+        
+        <div class="objective-field">
+          <label class="field-label" for="objectiveInput">Research Objective <span class="field-optional">(optional)</span></label>
+          <textarea id="objectiveInput" class="field-textarea" placeholder="What do you want to learn? e.g. 'Evaluate as a prospect for our sales automation platform' or 'Find their GTM strategy and decision makers for our partnership pitch'" rows="2"></textarea>
+        </div>
+
+        <div class="search-actions">
+          <div class="quick-targets">
+            <span class="quick-label">Try:</span>
+            <button class="quick-chip" onclick="setCompany('Stripe', 'stripe.com')">Stripe</button>
+            <button class="quick-chip" onclick="setCompany('Freshworks', 'freshworks.com')">Freshworks</button>
+            <button class="quick-chip" onclick="setCompany('Ramp', 'ramp.com')">Ramp</button>
+            <button class="quick-chip" onclick="setCompany('Notion', 'notion.so')">Notion</button>
+          </div>
+          <button class="btn-research" id="btnResearch" onclick="executeResearch()">
+            <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+            <span id="btnText">Research Company</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+        <section class="loading-state" id="loadingState">
+      <div class="loading-card">
+        <div class="loading-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring delay-1"></div>
+          <div class="spinner-ring delay-2"></div>
+        </div>
+        <div class="loading-info">
+          <h3 class="loading-title">Synthesizing Intelligence Report</h3>
+          <p class="loading-steps" id="loadingSteps">Querying web sources via Exa Neural Search...</p>
+          <div class="loading-progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <section class="results-section" id="resultsSection">
+
+            <div class="company-header-card" id="companyHeader">
+        <div class="company-header-top">
+          <div class="company-identity">
+            <div class="company-avatar" id="companyAvatar">S</div>
+            <div class="company-meta">
+              <h1 class="company-name" id="resCompanyName">Company</h1>
+              <div class="company-tags">
+                <a href="#" target="_blank" class="tag-domain" id="resWebsite">domain.com</a>
+                <span class="tag-industry" id="resIndustry">Industry</span>
+              </div>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="btn-ghost" onclick="exportJSON()" id="btnExport">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Export JSON
+            </button>
+            <button class="btn-ghost" onclick="newSearch()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+              </svg>
+              New Search
+            </button>
+          </div>
+        </div>
+        <p class="company-description" id="resDescription">Loading company description...</p>
+        
+        <div class="key-metrics" id="keyMetrics">
+          <div class="metric-item">
+            <div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="metric-content">
+              <span class="metric-label">Employees</span>
+              <span class="metric-value" id="resEmployees">—</span>
+            </div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+            <div class="metric-content">
+              <span class="metric-label">Target Market</span>
+              <span class="metric-value" id="resMarket">—</span>
+            </div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="metric-content">
+              <span class="metric-label">Valuation History</span>
+              <span class="metric-value" id="resFunding">—</span>
+            </div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="metric-content">
+              <span class="metric-label">Research Time</span>
+              <span class="metric-value" id="resDuration">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+            <div class="section-card gtm-card" id="gtmCard">
+        <div class="section-header">
+          <div class="section-icon gtm-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="6" r="6"/><circle cx="12" cy="2" r="2"/></svg></div>
+          <div>
+            <h2 class="section-title">GTM Opportunity Analysis</h2>
+            <p class="section-desc">AI-synthesized strategic positioning based on research evidence</p>
+          </div>
+        </div>
+        <div class="gtm-content" id="resGtmOpportunity">
+          Analyzing strategic opportunities...
+        </div>
+      </div>
+
+            <div class="firmographics-card" id="firmographicsCard" style="display: none;">
+        <div class="section-header" style="margin-bottom: 0;">
+          <div class="section-icon" style="background: rgba(42, 67, 101, 0.1); color: var(--conf-provider);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <h2 class="section-title">Firmographic Intelligence</h2>
+              <span class="provider-tag-badge" id="firmoSourceBadge">Public company research · Exa</span>
+            </div>
+            <p class="section-desc">Public corporate facts, business model, and documented technologies</p>
+          </div>
+        </div>
+        <div class="firmographics-grid">
+          <div class="firmographic-item">
+            <div class="firmographic-label">Headquarters</div>
+            <div class="firmographic-value" id="firmoHQ">—</div>
+            <div class="firmographic-sub" id="firmoHQSub"></div>
+          </div>
+          <div class="firmographic-item">
+            <div class="firmographic-label">Company Type</div>
+            <div class="firmographic-value" id="firmoType">—</div>
+            <div class="firmographic-sub" id="firmoTypeSub"></div>
+          </div>
+          <div class="firmographic-item">
+            <div class="firmographic-label">Business Model</div>
+            <div class="firmographic-value" id="firmoModel">—</div>
+            <div class="firmographic-sub" id="firmoModelSub"></div>
+          </div>
+          <div class="firmographic-item">
+            <div class="firmographic-label">Publicly Documented Technologies</div>
+            <div class="tech-pills" id="firmoTech">—</div>
+            <div class="firmographic-sub" id="firmoTechSub"></div>
+          </div>
+        </div>
+        </div>
+        <div class="moldset-notice-banner" id="firmoMoldsetNotice">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;color:var(--text-tertiary);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <div class="moldset-notice-title" id="moldsetNoticeTitle">Moldset enrichment unavailable</div>
+            <div class="moldset-notice-body" id="moldsetNoticeBody">API credentials aren't configured. Publicly available information is still shown; proprietary enrichment fields remain unavailable.</div>
+          </div>
+        </div>
+      </div>
+
+            <div class="two-col">
+        
+                <div class="section-card">
+          <div class="section-header">
+            <div class="section-icon signals-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div>
+              <h2 class="section-title">Growth Signals</h2>
+              <p class="section-desc"><span id="signalCount">0</span> events detected</p>
+            </div>
+          </div>
+          <div class="card-body" id="resSignalsList"></div>
+        </div>
+
+                <div class="section-card">
+          <div class="section-header">
+            <div class="section-icon people-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <h2 class="section-title">Key Decision Makers</h2>
+              <p class="section-desc"><span id="leaderCount">0</span> leaders identified</p>
+            </div>
+          </div>
+          <div class="card-body" id="resLeadersList"></div>
+        </div>
+      </div>
+
+            <div class="section-card" id="contactCard" style="display:none;">
+        <div class="section-header">
+          <div class="section-icon contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div>
+            <h2 class="section-title">Official Contact Pages</h2>
+            <p class="section-desc">Sourced from authorized public data</p>
+          </div>
+        </div>
+        <div class="card-body" id="resContactInfo"></div>
+      </div>
+
+            <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon confidence-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <h2 class="section-title">Field Confidence & Data Provenance</h2>
+            <p class="section-desc">Reliability assessment for each intelligence field</p>
+          </div>
+        </div>
+        <div class="confidence-grid" id="resConfidence"></div>
+      </div>
+
+            <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon source-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div>
+            <h2 class="section-title">Source Citations</h2>
+            <p class="section-desc"><span id="sourceCount">0</span> web sources analyzed</p>
+          </div>
+        </div>
+        <div class="sources-grid" id="resSourcesList"></div>
+      </div>
+
+            <div class="research-footer" id="researchFooter">
+        <div class="footer-stats">
+          <span class="footer-stat" id="footerProviders">Providers: —</span>
+          <span class="footer-divider">&middot;</span>
+          <span class="footer-stat" id="footerDuration">Duration: —</span>
+          <span class="footer-divider">&middot;</span>
+          <span class="footer-stat" id="footerTimestamp">Timestamp: —</span>
+        </div>
+        <div class="footer-warnings" id="footerWarnings"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

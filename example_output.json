@@ -1,0 +1,196 @@
+{
+  "success": true,
+  "data": {
+    "company_name": "Stripe",
+    "website": "https://stripe.com",
+    "official_contact_pages": [
+      "https://stripe.com/contact",
+      "https://stripe.com/newsroom/information"
+    ],
+    "company_description": "Stripe is a global technology and financial infrastructure company that builds economic infrastructure for the internet. It provides a comprehensive platform enabling businesses of every size—from startups to Fortune 500 corporations—to accept online and in-person payments, embed financial services, manage recurring billing, and automate revenue operations. In 2025, Stripe processed over $1.9 trillion in payment volume across its global merchant network.",
+    "industry": "Financial Technology (Fintech) / Payments Infrastructure",
+    "target_market": "Businesses of all sizes globally, including internet startups, high-growth SaaS platforms, online marketplaces, global ecommerce retailers, and Fortune 500 enterprise corporations.",
+    "employee_size": "Approximately 8,500 reported in January 2025; current count unavailable",
+    "employee_size_source": "https://techcrunch.com/2025/01/24/stripe-headcount/",
+    "funding_info": "$91.5B valuation in February 2025; $159B valuation in February 2026 (both established via employee tender-offer liquidity agreements, not primary funding rounds)",
+    "recent_growth_signals": [
+      {
+        "signal": "Completed the acquisition of stablecoin platform Bridge to build out open internet financial rails and expand global stablecoin payment settlement.",
+        "signal_type": "acquisition",
+        "date": "2025-02-04",
+        "source_url": "https://stripe.com/newsroom/news/stripe-completes-acquisition-of-bridge"
+      },
+      {
+        "signal": "Announced partnership with OpenAI to introduce Instant Checkout in ChatGPT, expanding Stripe's AI commerce infrastructure footprint.",
+        "signal_type": "partnership",
+        "date": "2025-09-29",
+        "source_url": "https://stripe.com/newsroom/news/openai-instant-checkout"
+      },
+      {
+        "signal": "Introduced Tempo, a high-throughput, low-latency payments-focused blockchain infrastructure designed for real-time stablecoin transactions.",
+        "signal_type": "product_launch",
+        "date": "2025-09-04",
+        "source_url": "https://stripe.com/newsroom/news/tempo"
+      },
+      {
+        "signal": "Stripe Billing reached a milestone of exceeding $500 million in annual run rate revenue, managing recurring revenue for over 300,000 global businesses.",
+        "signal_type": "expansion",
+        "date": "2025-02-27",
+        "source_url": "https://stripe.com/newsroom/news/stripe-annual-update-2024"
+      },
+      {
+        "signal": "Completed an employee liquidity tender offer valuing Stripe at $159 billion, following robust 34% YoY growth in payments volume to $1.9 trillion in 2025.",
+        "signal_type": "funding",
+        "date": "2026-02-25",
+        "source_url": "https://stripe.com/newsroom/news/tender-offer-2026"
+      }
+    ],
+    "potential_gtm_opportunity": "Stripe may be a potential fit for enterprise account intelligence, partnership research, and sales enablement tools given its international reach and expanding product portfolio. This is a research-based hypothesis, not evidence of an active buying requirement. Further validation would be needed to identify a relevant team and specific business need.",
+    "decision_makers": [
+      {
+        "name": "Patrick Collison",
+        "role": "Cofounder and CEO",
+        "source_url": "https://stripe.com/newsroom/information"
+      },
+      {
+        "name": "John Collison",
+        "role": "Cofounder and President",
+        "source_url": "https://stripe.com/newsroom/information"
+      },
+      {
+        "name": "Tyler Bryson",
+        "role": "Chief Revenue Officer",
+        "source_url": "https://stripe.com/newsroom/information"
+      },
+      {
+        "name": "Will Gaybrick",
+        "role": "President, Technology and Business",
+        "source_url": "https://stripe.com/newsroom/information"
+      },
+      {
+        "name": "Jeff Titterton",
+        "role": "Chief Marketing Officer",
+        "source_url": "https://stripe.com/newsroom/information"
+      },
+      {
+        "name": "Steffan Tomlinson",
+        "role": "Chief Financial Officer",
+        "source_url": "https://stripe.com/newsroom/information"
+      }
+    ],
+    "firmographics": {
+      "headquarters": "San Francisco and Dublin — dual headquarters",
+      "headquarters_source": "https://stripe.com/newsroom/information",
+      "headquarters_confidence": "verified",
+      "company_type": "Privately held",
+      "company_type_source": "Authoritative financial reporting",
+      "company_type_confidence": "verified",
+      "business_model": "Financial infrastructure, payments processing, and revenue management",
+      "business_model_source": "https://stripe.com/about",
+      "business_model_confidence": "verified",
+      "technologies": [
+        "Ruby",
+        "Go",
+        "Java",
+        "Python"
+      ],
+      "technologies_source": "https://stripe.dev/blog",
+      "technologies_confidence": "inferred",
+      "source_provider": "Public company research · Exa",
+      "moldset_status": "Unavailable — Moldset API not configured",
+      "moldset_configured": false,
+      "enrichment_notice": "Moldset enrichment unavailable: API credentials aren't configured. Publicly available information is still shown; proprietary enrichment fields remain unavailable."
+    },
+    "field_confidence": {
+      "company_name": "verified",
+      "website": "verified",
+      "company_description": "verified",
+      "industry": "verified",
+      "target_market": "verified",
+      "employee_size": "inferred",
+      "funding_info": "verified",
+      "recent_growth_signals": "verified",
+      "potential_gtm_opportunity": "inferred",
+      "decision_makers": "verified",
+      "official_contact_pages": "verified",
+      "headquarters": "verified",
+      "company_type": "verified",
+      "business_model": "verified",
+      "technologies": "inferred",
+      "firmographics": "verified"
+    },
+    "source_urls": [
+      {
+        "url": "https://stripe.com/newsroom/information",
+        "title": "Stripe Newsroom — Information and Assets",
+        "snippet": "Stripe is a financial infrastructure platform for businesses with dual headquarters in San Francisco and Dublin.",
+        "published_date": null
+      },
+      {
+        "url": "https://stripe.com/about",
+        "title": "About Stripe — Financial Infrastructure for the Internet",
+        "snippet": "Stripe builds economic infrastructure for the internet. Businesses of every size use our software to accept payments and manage revenue.",
+        "published_date": null
+      },
+      {
+        "url": "https://stripe.com/newsroom/news/stripe-completes-acquisition-of-bridge",
+        "title": "Stripe Completes Acquisition of Bridge",
+        "snippet": "Stripe completed its acquisition of Bridge on February 4, 2025 to accelerate adoption of open stablecoin payment rails globally.",
+        "published_date": "2025-02-04"
+      },
+      {
+        "url": "https://stripe.com/newsroom/news/openai-instant-checkout",
+        "title": "Stripe Powers Instant Checkout for OpenAI",
+        "snippet": "On September 29, 2025, Stripe announced support for Instant Checkout in ChatGPT, connecting AI agents and consumers to seamless payments.",
+        "published_date": "2025-09-29"
+      },
+      {
+        "url": "https://stripe.com/newsroom/news/tempo",
+        "title": "Stripe Introduces Tempo Payments Infrastructure",
+        "snippet": "Introduced on September 4, 2025, Tempo provides payments-focused blockchain infrastructure for real-time settlement.",
+        "published_date": "2025-09-04"
+      },
+      {
+        "url": "https://stripe.com/newsroom/news/stripe-annual-update-2024",
+        "title": "Stripe 2024 Annual Update — $1.9T Payment Volume",
+        "snippet": "Stripe processed over $1.9 trillion in payment volume in 2025, up 34% year-over-year. Stripe Billing surpassed a $500 million annual revenue run rate.",
+        "published_date": "2025-02-27"
+      },
+      {
+        "url": "https://stripe.com/newsroom/news/tender-offer-2026",
+        "title": "Stripe Signs Agreement for Employee Liquidity at $159B Valuation",
+        "snippet": "Stripe announced agreements for employee tender offers valuing the company at $159 billion, providing liquidity without raising primary capital.",
+        "published_date": "2026-02-25"
+      },
+      {
+        "url": "https://stripe.dev/blog",
+        "title": "Stripe Engineering Blog",
+        "snippet": "Deep dives into Stripe architecture, distributed systems, and core systems written in Ruby, Go, Java, and Python.",
+        "published_date": null
+      }
+    ],
+    "research_metadata": {
+      "sources_analyzed": 8,
+      "ai_model": "gemini-3.8-flash",
+      "research_objective": "Evaluate whether this company could be a good prospect for a B2B GTM service",
+      "enrichment_adapter": "moldset (fallback adapter — public research shown)"
+    },
+    "research_metadate": {
+      "sources_analyzed": 8,
+      "ai_model": "gemini-3.8-flash",
+      "research_objective": "Evaluate whether this company could be a good prospect for a B2B GTM service",
+      "enrichment_adapter": "moldset (fallback adapter — public research shown)"
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "Moldset: Moldset API credentials not configured. Public company research is displayed from Exa; proprietary enrichment fields remain unavailable."
+  ],
+  "research_duration_seconds": 3.42,
+  "providers_used": [
+    "exa",
+    "moldset (fallback adapter)",
+    "gemini-ai"
+  ],
+  "timestamp": "2026-10-18T13:54:00.000000"
+}
