@@ -4,6 +4,8 @@ A working prototype for automated B2B company research and data enrichment, insp
 
 I built this project for the Outmate technical assessment to demonstrate how an AI-native GTM platform can turn a simple company name and website into an evidence-backed company research dossier.
 
+live : gtm-prototype.onrender.com/api/health
+
 ---
 
 ## What It Does
