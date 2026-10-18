@@ -1,6 +1,16 @@
 .env
+.env.*
 .venv/
+venv/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 .pytest_cache/
 .DS_Store
+.vscode/
+.idea/
+
+docs/architecture.md
+docs/project_blueprint.md
+docs/product_exploration.md
