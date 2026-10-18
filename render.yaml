@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: outmate-gtm-prototype
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: EXA_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: MOLDSET_API_KEY
+        sync: false
