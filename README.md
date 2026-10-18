@@ -54,6 +54,8 @@ When evaluating prospects, sales teams typically spend 15 to 20 minutes manually
 [Frontend UI & JSON Export] (http://localhost:8000)
 ```
 
+<img width="958" height="1990" alt="image" src="https://github.com/user-attachments/assets/ae65d452-bf46-4811-ab34-a0bc121d44cf" />
+
 ---
 
 ## Getting Started
