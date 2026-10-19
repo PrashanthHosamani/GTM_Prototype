@@ -4,7 +4,7 @@ A full-stack, AI-native Go-To-Market (GTM) intelligence and prospecting platform
 
 Built for the Outmate technical assessment, this platform combines **Prompt-to-Spreadsheet Prospecting** (discovering matching B2B accounts via natural language ICP prompts, live web neural search, dynamic column synthesis, and verified leadership enrichment) with **12-Field Account Dossiers** (evidence-backed deep-dive company research with strict source provenance).
 
-live : https://gtm-prototype.onrender.com/
+**Live Demo**: [https://gtm-prototype.onrender.com/](https://gtm-prototype.onrender.com/)
 
 ---
 
