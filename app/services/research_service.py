@@ -1,6 +1,6 @@
 import time
 import typing
-from datetime import datetime
+from datetime import datetime, timezone
 from app.schemas.company import (
     ResearchInput, CompanyIntelligence, ResearchResponse,
     SourceEvidence, GrowthSignal, DecisionMaker
@@ -45,7 +45,7 @@ class ResearchService:
                 warnings=[],
                 research_duration_seconds=round(time.time() - start_time, 2),
                 providers_used=["exa"],
-                timestamp=datetime.utcnow()
+                timestamp=datetime.now(timezone.utc)
             )
 
         moldset_status = await self.moldset.enrich_company(name, website)
@@ -85,7 +85,7 @@ class ResearchService:
             errors=errors,
             research_duration_seconds=round(time.time() - start_time, 2),
             providers_used=providers_used,
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
     def _build_intelligence(self, report: dict, name: str, website: typing.Optional[str]) -> CompanyIntelligence:

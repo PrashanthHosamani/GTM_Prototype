@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.company import (
@@ -31,7 +31,7 @@ async def health_check():
         exa_configured = exa_configured,
         moldset_configured = moldset_configured,
         version = "0.1.0",
-        timestamp = datetime.utcnow()
+        timestamp = datetime.now(timezone.utc)
     )
 
 
@@ -69,3 +69,14 @@ async def prospect_followup(input_data : FollowupInput):
             status_code = 500,
             detail = f"Internal follow-up service error: {str(e)}"
         )
+
+
+@router.get("/prospect/session/{session_id}")
+async def get_prospect_session(session_id: str):
+    data = prospect_service.get_session_state(session_id)
+    if not data:
+        raise HTTPException(
+            status_code = 404,
+            detail = f"Session '{session_id}' not found"
+        )
+    return data

@@ -1,62 +1,75 @@
-# Outmate — AI-Powered GTM Research Prototype
+# Outmate — AI-Native GTM Intelligence & Prospecting Platform
 
-A working prototype for automated B2B company research and data enrichment, inspired by Orange Slice and Clay.
+A full-stack, AI-native Go-To-Market (GTM) intelligence and prospecting platform inspired by Orange Slice, Clay, and modern revenue intelligence engines.
 
-I built this project for the Outmate technical assessment to demonstrate how an AI-native GTM platform can turn a simple company name and website into an evidence-backed company research dossier.
+Built for the Outmate technical assessment, this platform combines **Prompt-to-Spreadsheet Prospecting** (discovering matching B2B accounts via natural language ICP prompts, live web neural search, dynamic column synthesis, and verified leadership enrichment) with **12-Field Account Dossiers** (evidence-backed deep-dive company research with strict source provenance).
 
 live : https://gtm-prototype.onrender.com/
 
 ---
 
-## What It Does
+## Key Capabilities
 
-When evaluating prospects, sales teams typically spend 15 to 20 minutes manually searching across company websites, news articles, LinkedIn, and funding databases. This prototype automates that discovery workflow in around 20 to 30 seconds:
+### 1. Prompt-to-Spreadsheet Prospector
+- **Natural Language ICP Querying**: Describe your target ICP in plain English (e.g., *"Find 10 fast-growing US Fintech startups with over $20M in funding"* or *"Find B2B SaaS companies that use HubSpot and are hiring SDRs"*).
+- **100% Live Neural Web Search**: Discovers genuine, active companies using Exa neural search across real-time web disclosures, news, and filings. Zero hardcoded mock data.
+- **Dynamic Prompt-Tailored Columns**: Columns and attributes adapt on the fly based on the specific query criteria (e.g., CRM stack, headcount bands, funding rounds, decision-makers, cold outreach angles).
+- **Conversational Follow-Up & Enrichment**: Continue the conversation naturally (*"Find the founders and CEOs of these companies"*, *"Add pricing model column"*, *"Filter to companies with >100 employees"*).
+- **Interactive Spreadsheet UI**: Formula bar, cell inspection modal, sort/filter controls, and 1-click export to CSV & Google Sheets format.
+- **Session & Search History**: Automatic session persistence with a slide-out search history drawer for instant recall.
 
-- Runs targeted neural web searches using Exa across multiple angles (company overview, recent funding, executive leadership, tech stack, and customer references).
-- Connects to an external enrichment provider (Moldset) through an adapter. If credentials are not configured, it handles the missing provider gracefully without fabricating fake data.
-- Synthesizes findings using Google Gemini with an automatic multi-model failover pool to prevent rate limits or daily quota exhaustion on the free tier.
-- Verifies leadership data by filtering out former employees, past interns, and stale executives.
-- Cites source URLs for every factual claim so users can click through and verify the evidence.
-- Provides a clean, responsive web interface with live progress tracking and 1-click JSON export.
+### 2. Active Link Verification & Provenance
+- **Live HTTP Status Validation**: The built-in `LinkVerifier` performs asynchronous HEAD/GET requests with redirect resolution to ensure official website URLs return healthy HTTP 200 responses.
+- **Executive Profile Sanitization**: Decision-maker LinkedIn profiles and official contact URLs are strictly verified and cleaned, filtering out dead links, broken paths, and hallucinated URLs.
+- **Source Audit Trail**: Every data point and qualification signal is accompanied by clickable source links for human-in-the-loop auditability.
+
+### 3. 12-Field Account Dossiers
+- **Comprehensive Pre-Call Intelligence**: Executive leadership, business model, verified customer proofs, financial telemetry, operational pain points, and high-conversion cold outreach hooks.
+- **Multi-Model AI Failover**: Gemini synthesis with automatic fallback across model tiers (`gemini-2.5-flash` → `gemini-2.0-flash` → `gemini-1.5-flash`) to ensure zero downtime.
+- **Personnel Safety Filter**: Automatically filters out former employees, past interns, and stale executive mentions.
 
 ---
 
-## How It Works
+## Architecture
 
 ```
-[User / Browser Client]
+[Browser Client / Frontend] (HTML5, Vanilla CSS, JS)
          │
-         │  POST /api/research {"name": "Stripe", "website": "stripe.com"}
+         ├──► POST /api/prospect           (New ICP prompt search)
+         ├──► POST /api/prospect/followup  (Enrichment & transformation)
+         ├──► GET  /api/prospect/session/* (Session restoration)
+         └──► POST /api/research           (12-Field company dossier)
+         │
          ▼
 [FastAPI Gateway] (app/api/routes.py)
-         │  Validates input data with Pydantic
+         │  • Pydantic schema validation & session routing
          ▼
-[Research Orchestrator] (app/services/research_service.py)
+[Agent Orchestrator & Services]
          │
-         ├──► [Exa Neural Search] (app/providers/exa.py)
-         │       • Scoped queries with exact company name and domain
-         │       • News, funding, leadership, tech stack, and customers
-         │       • Strips out sitemaps, robots.txt, and localized mirror pages
+         ├──► [Prospect Service] (app/services/prospect_service.py)
+         │       • Intent analysis & criteria extraction
+         │       • Exa neural company discovery
+         │       • Dynamic spreadsheet assembly & audit synchronization
          │
-         ├──► [Moldset Adapter] (app/providers/moldset.py)
-         │       • Dispatches live requests if MOLDSET_API_KEY is present
-         │       • Returns explicit fallback notice if unconfigured
+         ├──► [Research Service] (app/services/research_service.py)
+         │       • 12-field pre-call dossier generation
+         │       • Personnel safety filtering (ex-employees, past interns)
          │
-         ▼
-[AI Synthesizer] (app/services/ai_synthesizer.py)
-         │  Multi-model pool (Gemini 3.5 Flash → 3.7 Flash → 3.5 Lite)
-         │  Extracts 12 structured fields and assigns confidence levels
-         ▼
-[Personnel Safety Filter] (app/services/research_service.py)
-         │  Rejects former employees, ex-founders, and past interns
-         ▼
-[Structured Company Dossier]
-         │  Returned to frontend with full source audit trail
-         ▼
-[Frontend UI & JSON Export] (http://localhost:8000)
+         ├──► [External Providers]
+         │       • Exa Neural Search (app/providers/exa.py)
+         │       • Moldset Enrichment Adapter (app/providers/moldset.py)
+         │
+         ├──► [AI Synthesizer] (app/services/ai_synthesizer.py)
+         │       • Structured Gemini schema extraction
+         │       • Multi-model failover pool
+         │
+         ├──► [Link Verifier] (app/services/link_verifier.py)
+         │       • Asynchronous HTTP URL verification & redirect resolution
+         │       • LinkedIn profile sanitization & domain matching
+         │
+         └──► [SQLite Session Store] (app/db/session_store.py)
+                 • Conversational message history & sheet state persistence
 ```
-
-<img width="958" height="1990" alt="image" src="https://github.com/user-attachments/assets/ae65d452-bf46-4811-ab34-a0bc121d44cf" />
 
 ---
 
@@ -92,79 +105,95 @@ GEMINI_API_KEY=your_gemini_api_key_here
 # Install dependencies
 pip install -r requirements.txt
 
-# Start the development server
+# Start the application server
 uvicorn app.main:app --reload --port 8000
 ```
 
-Once running, open:
-- Dashboard: [http://localhost:8000](http://localhost:8000)
-- Interactive API Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
-- Health Check: [http://localhost:8000/api/health](http://localhost:8000/api/health)
+Once running, access:
+- **Platform Web App**: [http://localhost:8000](http://localhost:8000)
+- **Prompt Prospector View**: [http://localhost:8000/?view=prospect](http://localhost:8000/?view=prospect)
+- **Company Dossier View**: [http://localhost:8000/?view=deep](http://localhost:8000/?view=deep)
+- **Interactive OpenAPI Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **Health Check**: [http://localhost:8000/api/health](http://localhost:8000/api/health)
 
 ### 3. Run with Docker
 
 ```bash
-# Build the image
+# Build the Docker image
 docker build -t outmate-prototype .
 
 # Run the container
-docker run -p 8000:8000 --env-file .env outmate-prototype
+docker run -d -p 8000:8000 --name outmate-container --env-file .env outmate-prototype
 ```
 
 ---
 
 ## Running Tests
 
-I wrote automated unit tests with `pytest` covering the health check endpoint, input validation, and schema structure:
+Automated tests verify endpoint contracts, schema validation, live link verification, personnel safety filtering, and state synchronization:
 
 ```bash
-PYTHONPATH=. pytest tests/
+PYTHONPATH=. pytest tests/test_api.py -v
 ```
+
+**Test Suite Coverage:**
+- `test_health_check`: Service status and provider discovery
+- `test_schema_validation`: Input validation and error handling
+- `test_moldset_fallback_decoupling`: Graceful fallback without mock hallucination
+- `test_prospect_schema`: Dynamic spreadsheet row/column schema adherence
+- `test_data_quality_normalization`: Clean URL extraction and formatting
+- `test_intent_routing_company_vs_people`: Intelligent prompt routing
+- `test_fictional_and_anonymous_rejection`: Quality filter for verified accounts
+- `test_headcount_qualification_bounds`: Headcount band validation
+- `test_disqualified_industries`: Out-of-ICP industry rejection
+- `test_linkedin_url_sanitization`: Verified executive URL validation
+- `test_crm_evidence_explicit_mention`: Tech stack evidence qualification
+- `test_missing_decision_maker_prevents_qualification`: Decision-maker integrity
+- `test_synchronized_summary_and_audit_counts`: Summary vs table consistency
+- `test_new_search_vs_followup_intent_disambiguation`: Conversational state routing
 
 ---
 
 ## API Reference
 
+### POST `/api/prospect`
+Discovers matching companies from natural language prompt, extracts dynamic columns, and returns an interactive spreadsheet.
+
+**Request:**
+```json
+{
+  "prompt": "Find 10 B2B SaaS companies with 50-500 employees that use HubSpot or Salesforce",
+  "session_id": "session_1792440000"
+}
+```
+
+### POST `/api/prospect/followup`
+Applies conversational enrichment, column addition, or row filtering on top of an existing sheet.
+
+**Request:**
+```json
+{
+  "prompt": "Find the founders and decision makers for these companies",
+  "session_id": "session_1792440000",
+  "current_columns": [...],
+  "current_rows": [...]
+}
+```
+
 ### POST `/api/research`
-Takes a target company name and website, runs live web discovery and enrichment, and returns a structured GTM dossier.
+Generates a comprehensive 12-field pre-call research dossier for a specific company name and website.
 
 **Request:**
 ```json
 {
   "name": "Orange Slice",
   "website": "https://orangeslice.ai",
-  "reasearch_objective": "Evaluate whether this company could be a good prospect for a B2B GTM service."
+  "research_objective": "Evaluate whether this company could be a good prospect for a B2B GTM service."
 }
 ```
-
-**Response Fields:**
-- `company_name`: Verified company name.
-- `website`: Official website URL.
-- `company_description`: Sourced 3–4 sentence executive overview.
-- `industry`: Business domain or category.
-- `target_market`: Primary customer profile and ICP.
-- `employee_size`: Estimated headcount band with source date.
-- `funding_info`: Capital raised, recent rounds, and valuation context.
-- `recent_growth_signals`: Date-stamped expansions, funding rounds, or product launches.
-- `potential_gtm_opportunity`: Practical outreach angles based on their current stage.
-- `decision_makers`: Current active founders and executive leadership.
-- `official_contact_pages`: Direct links to contact, support, or about pages.
-- `firmographics`: Headquarters, business model, and documented tech stack.
-- `field_confidence`: Reliability ratings (`verified`, `inferred`, `provider-reported`, `unavailable`).
-- `source_urls`: List of all source URLs referenced during research.
 
 ### GET `/api/health`
-Returns the status of the service and indicates whether external API keys are detected:
-
-```json
-{
-  "status": "healthy",
-  "exa_configured": true,
-  "moldset_configured": false,
-  "version": "0.1.0",
-  "timestamp": "2026-10-19T02:00:00Z"
-}
-```
+Returns system status, active version, and configuration detection for external providers.
 
 ---
 
@@ -174,34 +203,33 @@ Returns the status of the service and indicates whether external API keys are de
 outmate-gtm-prototype/
 ├── app/
 │   ├── api/
-│   │   └── routes.py             # API route handlers (/api/research, /api/health)
+│   │   └── routes.py             # Route handlers (/api/prospect, /api/research, /api/health)
+│   ├── db/
+│   │   ├── session_store.py      # SQLite session history & message persistence
+│   │   └── __init__.py
 │   ├── providers/
-│   │   ├── exa.py                # Exa neural web search with exact query scoping
-│   │   └── moldset.py            # Moldset adapter with clean fallback handling
+│   │   ├── exa.py                # Exa neural web search with exact scoping
+│   │   ├── moldset.py            # Moldset adapter with clean fallback handling
+│   │   └── __init__.py
 │   ├── schemas/
-│   │   ├── company.py            # Pydantic schemas for the 12 company fields
+│   │   ├── company.py            # 12-field dossier Pydantic models
+│   │   ├── prospect.py           # Dynamic spreadsheet & copilot models
 │   │   └── __init__.py
 │   ├── services/
-│   │   ├── research_service.py   # Pipeline orchestrator & leadership filtering
+│   │   ├── agent_orchestrator.py # Conversational follow-up & enrichment coordinator
 │   │   ├── ai_synthesizer.py     # Gemini synthesis with multi-model failover
+│   │   ├── link_verifier.py      # Async HTTP link & LinkedIn URL verification
+│   │   ├── prospect_service.py   # ICP extraction, Exa search, & table assembly
+│   │   ├── research_service.py   # 12-field dossier pipeline & leadership safety
 │   │   └── __init__.py
-│   └── main.py                   # FastAPI app entry point & static files
+│   └── main.py                   # FastAPI app entry point & static file mounting
 ├── frontend/
-│   ├── index.html                # Research dashboard interface
-│   ├── style.css                 # Clean CSS styling
-│   └── app.js                    # UI state handling and progress tracking
+│   ├── index.html                # Unified GTM dashboard (Prospector & Dossier)
+│   ├── style.css                 # Responsive stylesheet & locked vertical chat layout
+│   └── app.js                    # Dynamic sheet rendering, cell inspector, & state
 ├── tests/
-│   └── test_api.py               # API & schema unit tests
-├── Dockerfile                    # Container build configuration
-├── example_output.json           # Example research output (Stripe)
-├── requirements.txt              # Python dependencies
+│   └── test_api.py               # 16 automated test suites
+├── Dockerfile                    # Production container build definition
+├── requirements.txt              # Pinned Python dependencies
 └── README.md
 ```
-
----
-
-## Known Limitations and Next Steps
-
-- **Single Company Ingestion:** The prototype is currently designed for single-company lookups. A natural next step is adding CSV and Google Sheets bulk uploads using background job queues (Redis and Celery).
-- **Caching Layer:** Caching research results by canonical domain for 7 to 14 days would prevent redundant API calls for common companies and keep costs down.
-- **Provider Waterfall:** Expanding `MoldsetProvider` into a multi-provider waterfall (e.g., Clearbit, Apollo, PDL) would improve coverage when a single provider has gaps.

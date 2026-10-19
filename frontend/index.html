@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Outmate — AI-Native GTM Intelligence & Prospecting Platform</title>
   <meta name="description" content="AI-native prompt-based sales prospecting, dynamic company spreadsheets, and deep evidence-backed company intelligence.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=21.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 
   <nav class="nav" id="mainNav">
     <div class="nav-inner">
-      <div class="nav-brand">
+      <div class="nav-brand" onclick="navigateTo('home')" style="cursor: pointer;" title="Back to Homepage">
         <div class="brand-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
@@ -22,23 +22,6 @@
         </div>
         <span class="brand-name">Outmate</span>
         <span class="brand-badge">GTM Platform</span>
-      </div>
-
-      <div class="mode-switcher">
-        <button class="mode-tab active" id="tabPromptMode" onclick="switchPlatformMode('prompt')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-          </svg>
-          Prompt Prospector
-          <span class="mode-badge-pill">Orange Slice & Origami</span>
-        </button>
-        <button class="mode-tab" id="tabDeepMode" onclick="switchPlatformMode('deep')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          Company Deep-Dive
-          <span class="mode-badge-pill">12-Field Dossier</span>
-        </button>
       </div>
 
       <div class="nav-status">
@@ -50,7 +33,64 @@
 
   <main class="app-container">
 
-    <section id="viewPrompt" class="platform-view active">
+    <section id="viewHome" class="platform-view active">
+      <div class="home-container">
+        <div class="home-hero">
+          <div class="home-pill">AI-Native Go-To-Market Platform</div>
+          <h1 class="home-title">Next-Gen Intelligence for <span class="home-accent">Modern Revenue Teams</span></h1>
+          <p class="home-subtitle">Find high-intent accounts in seconds with prompt-based prospecting, or generate evidence-backed 12-field deep dossiers before every sales call.</p>
+        </div>
+
+        <div class="home-grid">
+          
+          <div class="home-card" onclick="navigateTo('prospect')">
+            <div class="card-top">
+              <span class="card-badge orange">Prompt Prospector</span>
+            </div>
+            <div class="card-icon-box orange">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <h2 class="card-title">Prompt-to-Spreadsheet Prospector</h2>
+            <p class="card-desc">Describe your target ICP in natural language. Exa neural search discovers real matching companies, extracts dynamic columns (CRM stack, hiring, funding), and formats an exportable spreadsheet.</p>
+            <ul class="card-features">
+              <li><span class="feat-check">&#10003;</span> Natural language ICP querying &amp; continuous follow-up</li>
+              <li><span class="feat-check">&#10003;</span> Dynamic columns tailored to your exact prompt</li>
+              <li><span class="feat-check">&#10003;</span> 1-click export to CSV &amp; Google Sheets</li>
+            </ul>
+            <div class="card-cta">
+              <span class="btn-card-launch">Launch Prompt Prospector &rarr;</span>
+            </div>
+          </div>
+
+          <div class="home-card" onclick="navigateTo('deep')">
+            <div class="card-top">
+              <span class="card-badge blue">Company Deep-Dive</span>
+              <span class="card-model-tag">12-Field Dossier</span>
+            </div>
+            <div class="card-icon-box blue">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <h2 class="card-title">12-Field Account Dossier</h2>
+            <p class="card-desc">Deep pre-call intelligence for any specific company. Synthesizes executive leadership, business model, verified customer proofs, financial telemetry, pain points, and high-conversion cold outreach angles.</p>
+            <ul class="card-features">
+              <li><span class="feat-check">&#10003;</span> 12 comprehensive verified intelligence fields</li>
+              <li><span class="feat-check">&#10003;</span> Strict provenance with clickable live source proof</li>
+              <li><span class="feat-check">&#10003;</span> Decision-maker pain points &amp; personalized cold hooks</li>
+            </ul>
+            <div class="card-cta">
+              <span class="btn-card-launch">Launch Company Deep-Dive &rarr;</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="viewPrompt" class="platform-view">
       <div class="prospector-layout">
         
         <aside class="chat-panel">
@@ -59,7 +99,13 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               <span>AI Prospecting Copilot</span>
             </div>
-            <span class="live-pill">Live Neural Search</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <button class="btn-chat-reset" onclick="startNewProspectSearch()" title="Start New Search">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                New Search
+              </button>
+              <span class="live-pill">Live Neural</span>
+            </div>
           </div>
 
           <div class="chat-stream" id="chatStream"></div>
@@ -94,8 +140,8 @@
         <section class="sheet-panel">
           <div class="sheet-toolbar">
             <div class="sheet-title-group">
-              <h2 class="sheet-title" id="sheetTitle">B2B SaaS Prospects</h2>
-              <span class="row-count-badge" id="rowCountBadge">10 Rows</span>
+              <h2 class="sheet-title" id="sheetTitle">Prospect Sheet</h2>
+              <span class="row-count-badge" id="rowCountBadge">0 Rows</span>
             </div>
 
             <div class="sheet-actions">
@@ -105,16 +151,23 @@
               </div>
 
               <div class="export-group">
-                <button class="btn-action-outline" onclick="copyTableForSheets()">
+                <button class="btn-action-outline" id="btnCopyForSheets" onclick="copyTableForSheets()">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                   Copy for Sheets
                 </button>
-                <button class="btn-action-primary" onclick="exportTableToCsv()">
+                <button class="btn-action-primary" id="btnExportCsv" onclick="exportTableToCsv()">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                   Export CSV
                 </button>
               </div>
             </div>
+          </div>
+
+          <div class="sheet-formula-bar" id="sheetFormulaBar">
+            <span class="formula-fx">fx</span>
+            <span class="formula-cell-coord" id="formulaCellCoord">A1</span>
+            <div class="formula-value-box" id="formulaValueBox" title="Click to inspect full content" onclick="openCellDetailFromFormula()">Select any cell to inspect full content...</div>
+            <button class="btn-formula-expand" id="btnFormulaExpand" onclick="openCellDetailFromFormula()" title="Expand cell content" style="display:none;">⤢ Expand</button>
           </div>
 
           <div class="sheet-content-wrapper">
@@ -126,7 +179,13 @@
             <div id="sheetViewContainer" class="table-scroll-container">
               <table class="gtm-table" id="prospectTable">
                 <thead id="tableHead"></thead>
-                <tbody id="tableBody"></tbody>
+                <tbody id="tableBody">
+                  <tr>
+                    <td colspan="12" style="text-align:center;padding:64px 16px;color:#64748b;font-size:0.9rem;">
+                      No prospects loaded yet. Enter a prompt below or select a quick prompt to begin.
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
 
@@ -139,6 +198,19 @@
                 <h4>Suggested Follow-up Prompts:</h4>
                 <div class="followup-chips" id="followupChipsList"></div>
               </div>
+            </div>
+          </div>
+
+          <div class="sheet-status-footer" id="sheetStatusFooter">
+            <div class="sheet-status-left">
+              <span class="sheet-status-cell-indicator" id="statusCellIndicator">1 cell selected</span>
+              <button class="sheet-status-btn" onclick="openCellDetailFromFormula()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                Inspect Extended Content
+              </button>
+            </div>
+            <div class="sheet-status-right">
+              <span id="sheetFooterRowCount">Rows: 0</span>
             </div>
           </div>
         </section>
@@ -173,135 +245,201 @@
           <div class="search-actions">
             <div class="quick-targets">
               <span class="quick-label">Try:</span>
-              <button class="quick-btn" onclick="setCompany('Orange Slice', 'orangeslice.ai')">Orange Slice</button>
-              <button class="quick-btn" onclick="setCompany('Stripe', 'stripe.com')">Stripe</button>
-              <button class="quick-btn" onclick="setCompany('Outmate', 'outmate.ai')">Outmate</button>
+              <button class="quick-chip" onclick="setCompany('Orange Slice', 'orangeslice.ai')">Orange Slice</button>
+              <button class="quick-chip" onclick="setCompany('Stripe', 'stripe.com')">Stripe</button>
+              <button class="quick-chip" onclick="setCompany('Outmate', 'outmate.ai')">Outmate</button>
             </div>
-            <button class="btn-primary" id="btnResearch" onclick="executeResearch()">
-              <span class="btn-text">Generate Dossier</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            <button class="btn-research" id="btnResearch" onclick="executeResearch()">
+              <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
               </svg>
+              <span id="btnText">Generate Dossier</span>
             </button>
           </div>
         </div>
       </section>
 
-      <section class="loading-section" id="loadingSection" style="display: none;">
+      <section class="loading-state" id="loadingState">
         <div class="loading-card">
-          <div class="loading-header">
-            <div class="loading-spinner"></div>
-            <div>
-              <div class="loading-title">Generating Verified Account Dossier</div>
-              <div class="loading-subtitle">Exa Neural Search &middot; Gemini Synthesis &middot; Provenance Checks</div>
+          <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring delay-1"></div>
+            <div class="spinner-ring delay-2"></div>
+          </div>
+          <div class="loading-info">
+            <h3 class="loading-title">Synthesizing Verified Dossier</h3>
+            <p class="loading-steps" id="loadingSteps">Querying web sources via Exa Neural Search...</p>
+            <div class="loading-progress">
+              <div class="progress-bar" id="progressBar"></div>
             </div>
           </div>
-          <div class="loading-progress-bar">
-            <div class="progress-fill" id="progressBar"></div>
-          </div>
-          <div class="loading-steps" id="loadingSteps">Connecting to research orchestrator...</div>
         </div>
       </section>
 
       <section class="results-section" id="resultsSection" style="display: none;">
-        <div class="results-toolbar">
-          <button class="btn-back" onclick="newSearch()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            <span>New Research</span>
-          </button>
-          <div class="toolbar-actions">
-            <button class="btn-export" onclick="exportJSON()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span>Export JSON</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="profile-header-card" id="companyHeaderCard">
-          <div class="profile-main">
-            <div class="profile-info">
-              <div class="profile-title-row">
-                <h2 class="profile-name" id="resCompanyName">—</h2>
-                <span class="confidence-pill verified" id="badgeConfidence">verified</span>
-              </div>
-              <div class="profile-meta">
-                <a href="#" target="_blank" class="meta-link" id="resCompanyWebsite">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                  <span id="resWebsiteText">—</span>
-                </a>
-                <span class="meta-divider">&middot;</span>
-                <span class="meta-item" id="resIndustry">—</span>
-                <span class="meta-divider">&middot;</span>
-                <span class="meta-item" id="resHeadquarters">—</span>
+        <div class="company-header-card" id="companyHeader">
+          <div class="company-header-top">
+            <div class="company-identity">
+              <div class="company-avatar" id="companyAvatar">S</div>
+              <div class="company-meta">
+                <h1 class="company-name" id="resCompanyName">Company</h1>
+                <div class="company-tags">
+                  <a href="#" target="_blank" class="tag-domain" id="resWebsite">domain.com</a>
+                  <span class="tag-industry" id="resIndustry">Industry</span>
+                </div>
               </div>
             </div>
-          </div>
-          <p class="profile-desc" id="resDescription">—</p>
-        </div>
-
-        <div class="metrics-grid">
-          <div class="metric-card">
-            <div class="metric-label">Employee Count</div>
-            <div class="metric-value" id="resEmployeeSize">—</div>
-            <div class="metric-sub" id="resEmployeeMeta">Source-backed estimate</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Funding & Capital</div>
-            <div class="metric-value" id="resFundingInfo">—</div>
-            <div class="metric-sub" id="resFundingMeta">Disaggregated valuation</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Target Market & ICP</div>
-            <div class="metric-value" id="resTargetMarket">—</div>
-            <div class="metric-sub">Commercial buyer profile</div>
-          </div>
-        </div>
-
-        <div class="dossier-card">
-          <div class="section-header">
-            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <div>
-              <h2 class="section-title">Key Decision Makers</h2>
-              <p class="section-desc">Active founders and C-suite leadership (former personnel filtered out)</p>
+            <div class="header-actions">
+              <button class="btn-ghost" onclick="exportJSON()" id="btnExport">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Export JSON
+              </button>
+              <button class="btn-ghost" onclick="newSearch()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                </svg>
+                New Search
+              </button>
             </div>
           </div>
-          <div class="leaders-grid" id="resDecisionMakers"></div>
-        </div>
-
-        <div class="dossier-card">
-          <div class="section-header">
-            <div class="section-icon signal-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-            <div>
-              <h2 class="section-title">Recent Growth Signals</h2>
-              <p class="section-desc">Verified capital raises, hiring surges, and major product launches</p>
+          <p class="company-description" id="resDescription">Loading company description...</p>
+          
+          <div class="key-metrics" id="keyMetrics">
+            <div class="metric-item">
+              <div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div class="metric-content">
+                <span class="metric-label">Employees</span>
+                <span class="metric-value" id="resEmployees">—</span>
+              </div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="6" r="6"/><circle cx="12" cy="2" r="2"/></svg></div>
+              <div class="metric-content">
+                <span class="metric-label">Target Market</span>
+                <span class="metric-value" id="resMarket">—</span>
+              </div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div class="metric-content">
+                <span class="metric-label">Valuation History</span>
+                <span class="metric-value" id="resFunding">—</span>
+              </div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div class="metric-content">
+                <span class="metric-label">Research Time</span>
+                <span class="metric-value" id="resDuration">—</span>
+              </div>
             </div>
           </div>
-          <div class="signals-list" id="resGrowthSignals"></div>
         </div>
 
-        <div class="dossier-card">
+        <div class="section-card gtm-card" id="gtmCard">
           <div class="section-header">
-            <div class="section-icon opp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+            <div class="section-icon gtm-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="6" r="6"/><circle cx="12" cy="2" r="2"/></svg></div>
             <div>
-              <h2 class="section-title">Potential GTM Opportunity</h2>
-              <p class="section-desc">Strategic commercial positioning hypothesis based on current stage</p>
+              <h2 class="section-title">GTM Opportunity Analysis</h2>
+              <p class="section-desc">AI-synthesized strategic positioning based on research evidence</p>
             </div>
           </div>
-          <div class="gtm-content" id="resGtmOpportunity"></div>
+          <div class="gtm-content" id="resGtmOpportunity">
+            Analyzing strategic opportunities...
+          </div>
         </div>
 
-        <div class="dossier-card">
-          <div class="section-header">
-            <div class="section-icon firmo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="firmographics-card" id="firmographicsCard" style="display: none;">
+          <div class="section-header" style="margin-bottom: 0;">
+            <div class="section-icon" style="background: rgba(42, 67, 101, 0.1); color: var(--conf-provider);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
             <div>
-              <h2 class="section-title">Firmographics & Tech Stack</h2>
-              <p class="section-desc">Public engineering disclosures and company foundation</p>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <h2 class="section-title">Firmographic Intelligence</h2>
+                <span class="provider-tag-badge" id="firmoSourceBadge">Public company research · Exa</span>
+              </div>
+              <p class="section-desc">Public corporate facts, business model, and documented technologies</p>
             </div>
           </div>
-          <div class="firmo-details" id="resFirmographics"></div>
+          <div class="firmographics-grid">
+            <div class="firmographic-item">
+              <div class="firmographic-label">Headquarters</div>
+              <div class="firmographic-value" id="firmoHQ">—</div>
+              <div class="firmographic-sub" id="firmoHQSub"></div>
+            </div>
+            <div class="firmographic-item">
+              <div class="firmographic-label">Company Type</div>
+              <div class="firmographic-value" id="firmoType">—</div>
+              <div class="firmographic-sub" id="firmoTypeSub"></div>
+            </div>
+            <div class="firmographic-item">
+              <div class="firmographic-label">Business Model</div>
+              <div class="firmographic-value" id="firmoModel">—</div>
+              <div class="firmographic-sub" id="firmoModelSub"></div>
+            </div>
+            <div class="firmographic-item">
+              <div class="firmographic-label">Publicly Documented Technologies</div>
+              <div class="tech-pills" id="firmoTech">—</div>
+              <div class="firmographic-sub" id="firmoTechSub"></div>
+            </div>
+          </div>
+          <div class="moldset-notice-banner" id="firmoMoldsetNotice">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;color:var(--text-tertiary);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <div>
+              <div class="moldset-notice-title" id="moldsetNoticeTitle">Moldset enrichment unavailable</div>
+              <div class="moldset-notice-body" id="moldsetNoticeBody">API credentials aren't configured. Publicly available information is still shown; proprietary enrichment fields remain unavailable.</div>
+            </div>
+          </div>
         </div>
 
-        <div class="dossier-card">
+        <div class="two-col">
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-icon signals-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+              <div>
+                <h2 class="section-title">Growth Signals</h2>
+                <p class="section-desc"><span id="signalCount">0</span> events detected</p>
+              </div>
+            </div>
+            <div class="card-body" id="resSignalsList"></div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-icon people-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div>
+                <h2 class="section-title">Key Decision Makers</h2>
+                <p class="section-desc"><span id="leaderCount">0</span> leaders identified</p>
+              </div>
+            </div>
+            <div class="card-body" id="resLeadersList"></div>
+          </div>
+        </div>
+
+        <div class="section-card" id="contactCard" style="display:none;">
+          <div class="section-header">
+            <div class="section-icon contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div>
+              <h2 class="section-title">Official Contact Pages</h2>
+              <p class="section-desc">Sourced from authorized public data</p>
+            </div>
+          </div>
+          <div class="card-body" id="resContactInfo"></div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-icon confidence-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div>
+              <h2 class="section-title">Field Confidence & Data Provenance</h2>
+              <p class="section-desc">Reliability assessment for each intelligence field</p>
+            </div>
+          </div>
+          <div class="confidence-grid" id="resConfidence"></div>
+        </div>
+
+        <div class="section-card">
           <div class="section-header">
             <div class="section-icon source-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
             <div>
@@ -328,20 +466,69 @@
   </main>
 
   <div class="modal-backdrop" id="hookModal" style="display: none;" onclick="closeHookModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-card email-modal-card" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h3 id="modalHookTitle">Cold Outreach Hook</h3>
+        <div class="email-modal-title-row">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <h3 id="modalHookTitle">Tailored Cold Outreach Pitch</h3>
+        </div>
         <button class="modal-close" onclick="closeHookModal()">&times;</button>
       </div>
-      <div class="modal-body">
-        <p class="hook-text" id="modalHookContent"></p>
+      <div class="modal-body email-modal-body">
+        <div class="email-field-row">
+          <label>Target Decision Maker:</label>
+          <div class="email-field-val" id="modalTargetRecipient">—</div>
+        </div>
+        <div class="email-field-row">
+          <label>Contact Email:</label>
+          <div class="email-field-val email-mono" id="modalTargetEmail">—</div>
+        </div>
+        <div class="email-field-row">
+          <label>Subject Line:</label>
+          <input type="text" class="email-subject-input" id="modalEmailSubject" readonly>
+        </div>
+        <div class="email-body-area">
+          <label>Personalized Cold Email Body:</label>
+          <textarea class="email-body-textarea" id="modalEmailBody" rows="8" readonly></textarea>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button class="btn-action-primary" onclick="copyHookToClipboard()">Copy to Clipboard</button>
+      <div class="modal-footer email-modal-footer">
+        <a id="modalMailtoBtn" href="#" class="btn-action-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open in Mail Client
+        </a>
+        <button class="btn-action-primary" id="btnCopyEmail" onclick="copyFullEmail()">
+          Copy Full Email
+        </button>
       </div>
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <div class="modal-backdrop" id="cellDetailModal" style="display: none;" onclick="closeCellDetailModal(event)">
+    <div class="modal-card cell-detail-modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="email-modal-title-row">
+          <span class="cell-col-badge" id="cellDetailColName">Column</span>
+          <h3 id="cellDetailTitle">Full Content</h3>
+        </div>
+        <button class="modal-close" onclick="closeCellDetailModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="cell-detail-full-text" id="cellDetailFullText"></div>
+      </div>
+      <div class="modal-footer" style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="cell-detail-subtext" id="cellDetailCharCount">0 characters</span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-action-outline" id="btnCopyCellText" onclick="copyCellDetailText()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="btnCopyCellLabel">Copy Content</span>
+          </button>
+          <button class="btn-action-primary" onclick="closeCellDetailModal()">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=21.0"></script>
 </body>
 </html>
