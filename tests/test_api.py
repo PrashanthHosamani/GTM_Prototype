@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.schemas.company import ResearchInput, CompanyIntelligence, SourceEvidence
+from app.schemas.prospect import ColumnDef, ProspectResponse, ProspectInput
 
 client = TestClient(app)
 
@@ -51,3 +52,19 @@ def test_moldset_fallback_decoupling():
     assert "enrichment_status" in res["enrichment"]
     assert "Unavailable" in res["enrichment"]["enrichment_status"]
 
+
+def test_prospect_schema():
+    col = ColumnDef(key="crm_platform", label="CRM Platform", type="badge")
+    assert col.key == "crm_platform"
+    assert col.type == "badge"
+
+    resp = ProspectResponse(
+        title="Test Sheet",
+        summary="Test Summary",
+        todos=[],
+        columns=[col],
+        rows=[{"crm_platform": "HubSpot", "company_name": "Acme"}],
+        suggested_followups=["Filter Acme"]
+    )
+    assert resp.title == "Test Sheet"
+    assert len(resp.rows) == 1

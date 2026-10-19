@@ -26,6 +26,7 @@ frontend_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "fronten
 
 
 @app.get("/")
+@app.get("/deep")
 async def serve_index():
     index_file = os.path.join(frontend_dir, "index.html")
     if os.path.exists(index_file):

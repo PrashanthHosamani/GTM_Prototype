@@ -7,10 +7,17 @@ from app.schemas.company import (
     ResearchResponse,
     HealthResponse,
 )
+from app.schemas.prospect import (
+    ProspectInput,
+    FollowupInput,
+    ProspectResponse,
+)
 from app.services.research_service import ResearchService
+from app.services.prospect_service import ProspectService
 
 router = APIRouter()
 research_service = ResearchService()
+prospect_service = ProspectService()
 
 
 @router.get("/health", response_model = HealthResponse)
@@ -37,4 +44,28 @@ async def research_company(input_data : ResearchInput):
         raise HTTPException(
             status_code = 500,
             detail = f"Internal research service error: {str(e)}"
+        )
+
+
+@router.post("/prospect", response_model = ProspectResponse)
+async def prospect_companies(input_data : ProspectInput):
+    try:
+        response = await prospect_service.execute_prospecting(input_data)
+        return response
+    except Exception as e:
+        raise HTTPException(
+            status_code = 500,
+            detail = f"Internal prospecting service error: {str(e)}"
+        )
+
+
+@router.post("/prospect/followup", response_model = ProspectResponse)
+async def prospect_followup(input_data : FollowupInput):
+    try:
+        response = await prospect_service.execute_followup(input_data)
+        return response
+    except Exception as e:
+        raise HTTPException(
+            status_code = 500,
+            detail = f"Internal follow-up service error: {str(e)}"
         )

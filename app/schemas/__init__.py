@@ -7,6 +7,13 @@ from .company import (
     ResearchResponse,
     HealthResponse,
 )
+from .prospect import (
+    ColumnDef,
+    AgentTodo,
+    ProspectResponse,
+    ProspectInput,
+    FollowupInput,
+)
 
 __all__ = [
     "ResearchInput",
@@ -16,4 +23,9 @@ __all__ = [
     "CompanyIntelligence",
     "ResearchResponse",
     "HealthResponse",
+    "ColumnDef",
+    "AgentTodo",
+    "ProspectResponse",
+    "ProspectInput",
+    "FollowupInput",
 ]
